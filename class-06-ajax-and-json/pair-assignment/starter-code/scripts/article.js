@@ -56,11 +56,15 @@ Article.fetchAll = function() {
     // TODO: When we don't already have the rawData, we need to:
     // 1. Retrieve the JSON file from the server with AJAX (which jQuery method is best for this?),
     $.getJSON('/data/hackerIpsum.json', function(rawData) {
-      Article.loadAll(rawData);
-      var cache = JSON.stringify(rawData);
-      localStorage.setItem('localData', cache);
+      return rawData;
+    }).done(function(data) {
+      Article.loadAll(data);
+      localStorage.setItem('rawData', JSON.stringify(data));
+      // var cache = JSON.stringify(rawData);
+      // localStorage.setItem('rawData', cache);
       console.log('set localStorage');
       articleView.initIndexPage();
+
     });
     // 2. Store the resulting JSON data with the .loadAll method,
 
