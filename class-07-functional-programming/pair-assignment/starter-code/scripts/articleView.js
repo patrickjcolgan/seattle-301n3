@@ -122,7 +122,9 @@
 
   articleView.initAdminPage = function() {
     // TODO: Call the Handlebars `.compile` function, which will return a function for you to use where needed.
-    var template; // = ...?
+    var $templateScript = $('#author-template').html();
+    var template = Handlebars.compile($templateScript);
+    return template(this); // = ...?
 
     // DONE: We use `forEach` here because we are relying on the side-effects of the callback function:
     // appending to the DOM.

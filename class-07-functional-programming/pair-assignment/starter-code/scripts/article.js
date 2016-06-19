@@ -91,4 +91,5 @@ Article.numWordsByAuthor = function() {
     }
   })
 };
+module.Article = Article;
 })(window);
