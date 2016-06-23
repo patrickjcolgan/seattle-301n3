@@ -58,7 +58,7 @@
       [
         {
           /* ... */
-          'sql': 'DELETE from articleTable WHERE title=?';,
+          'sql': 'DELETE from articleTable WHERE title=?;',
           'data': [this.title]
         }
       ],
@@ -71,7 +71,8 @@
     webDB.execute(
       [
         {
-          /* ... */
+          'sql': 'UPDATE TABLE articleTable SET id=?, .....WHERE title=?;'
+          data: [this.title, this.category, this.author, this.authorUrl, this.publishedOn, this.body]
         }
       ],
       callback
