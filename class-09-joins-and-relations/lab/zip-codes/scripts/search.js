@@ -72,9 +72,13 @@ var coordinates;
      var $zipSearch = $('.zip-search').val();
      webDB.execute(
        'SELECT DISTINCT latitude, longitude, city, zip FROM zips WHERE zip = ' + $zipSearch + ';',
-       function(data) {
-         console.log(data);
-        initMap(data);
+       function(data, error) {
+         if (error) {
+           console.error("please enter 5 digit zip code");
+           $('.zip-search').text("search results invalid");
+         } else {
+           initMap(data);
+         }
        });
 });
 };
