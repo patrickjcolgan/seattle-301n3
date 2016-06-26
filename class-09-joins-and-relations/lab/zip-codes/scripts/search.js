@@ -1,6 +1,7 @@
 (function(module) {
 
 var Filters = {};
+var ZipForm = {};
 
   // TODO: Write the code to populate your filters, and enable the search queries here in search.js
   // TODO: You will also interact with the map.js file here
@@ -45,5 +46,24 @@ var Filters = {};
     })
   }
 
+ ZipForm.zipInput = function() {
+   $('form').on('submit', function(e) {
+     e.preventDefault();
+     var $zipSearch = $('.zip-search').val();
+     webDB.execute('SELECT DISTINCT city, zip FROM zips WHERE zip = ' + $zipSearch + ';', function(rows) {
+       rows.forEach(function(ele) {
+         console.log(ele);
+       })
+       if (rows.length >= 1) {
+         console.log("zip input successful");
+       } else {
+         console.log("zip input failure!");
+       }
+     });
+ })
+ };
+
+ZipForm.zipInput();
 module.Filters = Filters;
+module.ZipForm = ZipForm;
 })(window);
