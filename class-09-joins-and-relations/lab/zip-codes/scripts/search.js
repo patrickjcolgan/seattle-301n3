@@ -66,20 +66,36 @@ var coordinates;
   };
 
 
- ZipForm.zipInput = function() {
-   $('form').on('submit', function(e) {
-     e.preventDefault();
-     var $zipSearch = $('.zip-search').val();
-     webDB.execute(
-       'SELECT DISTINCT latitude, longitude, city, zip FROM zips WHERE zip = ' + $zipSearch + ';',
-       function(data, error) {
-         if (error) {
-           console.error("please enter 5 digit zip code");
-           $('.zip-search').text("search results invalid");
-         } else {
-           initMap(data);
-         }
-       });
+//  ZipForm.zipInput = function() {
+//    $('form').on('submit', function(e) {
+//      e.preventDefault();
+//      var $zipSearch = $('.zip-search').val();
+//      webDB.execute(
+//        'SELECT DISTINCT latitude, longitude, city, zip FROM zips WHERE zip = ' + $zipSearch + ';',
+//        function(data) {
+//          if (!data) {
+//            console.log("please enter 5 digit zip code");
+//            $('.zip-search').text("search results invalid");
+//          } else {
+//            initMap(data);
+//          }
+//        });
+// });
+// };
+ZipForm.zipInput = function() {
+  $('form').on('submit', function(e) {
+    e.preventDefault();
+    var $zipSearch = $('.zip-search').val();
+    webDB.execute(
+      'SELECT DISTINCT latitude, longitude, city, zip FROM zips WHERE zip = ' + $zipSearch + ';',
+      function(data) {
+        if (data.length) {
+          console.log(data.length);
+          initMap(data);
+        } else {
+          console.log('no data');
+        }
+      });
 });
 };
 
