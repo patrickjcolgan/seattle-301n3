@@ -7,8 +7,8 @@
   // code that used to be in index.html.
   // DONE: TODO: Also be sure to hide all the main section elements, and reveal the #articles section:
   articlesController.index = function() {
-    Article.fetchAll(articleView.initIndexPage);//Patrick
-      $('.main-nav').on('click', '.tab', function(e) {
+    Article.fetchAll(articleView.initIndexPage);//Patrick: this line is the 2nd 'todo'
+      $('.main-nav').on('click', '.tab', function(e) {//Patrick: third 'todo'
         $('.tab-content').hide();
         $('#articles').show();
       })
