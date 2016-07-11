@@ -13,6 +13,7 @@
   };
 
   // COMMENT: What does this method do?  What is it's execution path?
+  // ANSWER: We have a populateFilters method on the articleView object. We are using handlebars to compile the populateFilters method via the option-template. This renders according to the option template ids author-filter or category-filter.
   articleView.populateFilters = function() {
     var options,
       template = Handlebars.compile($('#option-template').text());
@@ -38,6 +39,7 @@
   };
 
   // COMMENT: What does this method do?  What is it's execution path?
+  // ANSWER: We have a handleFilters method on the articleView object. On filter change, the '-filter' is replaced with the selected author or category.
   articleView.handleFilters = function() {
     $('#filters').one('change', 'select', function() {
       resource = this.id.replace('-filter', '');
@@ -124,16 +126,19 @@
   };
 
   // COMMENT: What does this method do?  What is it's execution path?
+  // ANSWER: WE have the articles param passed into the index method on the articleView object. When this function is called, we are showing the element with an id of articles and hiding its sibling elements.
   articleView.index = function(articles) {
     $('#articles').show().siblings().hide();
 
-    $('#articles article').remove();
+    $('#articles article').remove(); //We are targeting any article tag within the article ID and removing content, and then appending all the articles.
     articles.forEach(function(a) {
       $('#articles').append(render(a));
     });
 
     articleView.populateFilters();
     // COMMENT: What does this method do?  What is it's execution path?
+    // ANSWER: We are calling the populateFilters method on the articleView object. Each path on routes.js invokes articlesController.index which then in turn invokes articleView.index.
+    // This invokes articleView.populateFilters.
     articleView.handleFilters();
 
     // DONE: Replace setTeasers with just the truncation logic, if needed:
